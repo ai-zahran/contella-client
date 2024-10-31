@@ -23,12 +23,17 @@ app = FastAPI(middleware=middleware)
 # app = FastAPI()
 
 connect_str = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+cosmos_endpoint = os.getenv("COSMOS_DB_ENDPOINT")
+cosmos_key = os.getenv("COSMOS_DB_KEY")
+azure_storage_account_name = os.getenv('AZURE_STORAGE_ACCOUNT_NAME')
+
+for v in [connect_str, cosmos_endpoint, cosmos_key, azure_storage_account_name]:
+    assert isinstance(v, str) and v.strip() != ""
+
 blob_service_client = BlobServiceClient.from_connection_string(connect_str)
 container_name = "pdf-files"  # Define your container name
 
 # Cosmos DB setup
-cosmos_endpoint = os.getenv("COSMOS_DB_ENDPOINT")
-cosmos_key = os.getenv("COSMOS_DB_KEY")
 cosmos_database_name = "pdf_data"
 cosmos_container_name = "pdf_records"
 
@@ -71,7 +76,7 @@ async def upload_pdf(email: str = Form(...), pdfFile: UploadFile = File(...)):
         blob_client.upload_blob(file_data)
 
         # Construct the PDF link
-        pdf_link = f"https://{os.getenv('AZURE_STORAGE_ACCOUNT_NAME')}.blob.core.windows.net/" \
+        pdf_link = f"https://{azure_storage_account_name}.blob.core.windows.net/" \
                    f"{container_name}/{unique_filename}"
 
         # Create a record to store in Cosmos DB
