@@ -4,6 +4,12 @@ on:
   push:
   pull_request:
 
+env:
+  AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+  AZURE_STORAGE_ACCOUNT_NAME: ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
+  COSMOS_DB_ENDPOINT: ${{ secrets.COSMOS_DB_ENDPOINT }}
+  COSMOS_DB_KEY: ${{ secrets.COSMOS_DB_KEY }}
+
 jobs:
 
   build_publish_containers:
