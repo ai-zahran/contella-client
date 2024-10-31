@@ -25,7 +25,7 @@ jobs:
           submodules: recursive
 
       - name: Run Tests
-        run: pytest tests
+        run: python -m unittest discover tests
 
       - name: Build/push
         uses: whoan/docker-build-with-cache-action@v5
