@@ -14,4 +14,4 @@ RUN pip install -r requirements.txt
 EXPOSE 80
 
 # Run the FastAPI application with Uvicorn
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "src.app:app", "--host", "0.0.0.0", "--port", "80"]

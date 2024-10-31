@@ -9,7 +9,7 @@ import uuid
 import uvicorn
 
 
-from validation import PDFUploadValidationMiddleware, \
+from src.validation import PDFUploadValidationMiddleware, \
     validate_and_normalize_email  # Import the middleware class, not an instance.
 
 
